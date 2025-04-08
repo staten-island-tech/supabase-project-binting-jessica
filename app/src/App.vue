@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 </script>
@@ -10,12 +11,15 @@ import TheWelcome from './components/TheWelcome.vue'
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
     </div>
+
+    <router-link to="/login" class="button">
+      <h3>Login Page</h3>
+    </router-link>
   </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+  <RouterView />
 </template>
+
 
 <style scoped>
 header {
