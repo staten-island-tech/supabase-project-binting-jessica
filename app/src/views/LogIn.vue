@@ -1,35 +1,44 @@
 <template>
     <div>
-      <form id="user-form">
+      <!-- <form id="user-form">
         <input type="text" id="gmail" placeholder="Gmail" required />
         <input type="text" id="password" placeholder="Password" required />
         <button type="submit">Submit</button>
-      </form>
+      </form> -->
+      <ul>
+        <li v-for="buser in busers" :key="buser.id">{{ buser.username }}</li>
+      </ul>
     </div>
 </template>
 
 <script setup>
-import { createClient } from '@supabase/supabase-js'
-const supabase = createClient('https://mpkijprcubmttyjpxasg.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1wa2lqcHJjdWJtdHR5anB4YXNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQzMDc3MDEsImV4cCI6MjA1OTg4MzcwMX0.9ezq3Pg_xAj4pQLNxhzWq0do0HCl8EuoNyMmIinS3bE')
-
-document.getElementById('user-form').addEventListener('submit', async (e) => {
-  e.preventDefault()
-
-  const gmail = document.getElementById('gmail').value
-  const password = document.getElementById('password').value
-
-  const { data, error } = await supabase
-    .from('users')
-    .insert([{ gmail, password }])
-
-  if (error) {
-    console.error('Error inserting data:', error)
-  } else {
-    console.log('Inserted data:', data)
-  }
+import { supabase } from '../lib/supabaseClient';
+import { ref, onMounted } from 'vue';
+const busers = ref([]);
+async function getUsers() {
+  const { data } = await supabase.from('busers').select()
+  busers.value = data
+}
+onMounted(() => {
+   getUsers()
 })
+// document.getElementById('user-form').addEventListener('submit', async (e) => {
+//   e.preventDefault()
 
-.insert([{gmail: 'fhjlahdofjsf@gmail.com', password: 'sdhfilahdl;f'}])
+//   const gmail = document.getElementById('gmail').value
+//   const password = document.getElementById('password').value
+
+//   const { data, error } = await supabase
+//     .from('busers')
+//     .insert([{ gmail, password }])
+
+//   if (error) {
+//     console.error('Error inserting data:', error)
+//   } else {
+//     console.log('Inserted data:', data)
+//   }
+// })
+
 
 </script>
 
