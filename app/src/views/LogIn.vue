@@ -1,8 +1,8 @@
 <template>
     <div>
-      <form id="user-form">
-        <input type="text" id="gmail" placeholder="Gmail" required />
-        <input type="text" id="password" placeholder="Password" required />
+      <form @submit.prevent="handleSubmit">
+        <input type="email" v-model="gmail" placeholder="Gmail" required />
+        <input type="password" v-model="password" placeholder="Password" required />
         <button type="submit">Submit</button>
       </form>
       <!-- <h2 v-for="buser in busers" :key="buser.id">{{ buser.Username }}</h2> -->
@@ -20,29 +20,26 @@ import { ref, onMounted } from 'vue';
 // onMounted(() => {
 //    getUsers();
 // })
-document.getElementById('user-form').addEventListener('submit', async (e) => {
-  e.preventDefault()
-  const gmail = document.getElementById('gmail').value
-  const password = document.getElementById('password').value
-  const { data, error } = await supabase.auth.signInWithPassword({
-  Email: gmail,
-  password: password
-})
-  // const { data, error } = await supabase
-  //   .from('auth.users')
-  //   .insert({ Email: gmail })
-  //   .from('busers')
-  //   .insert({ password: password })
 
-  // if (error) {
-  //   console.error('Error inserting data:', error)
-  // } else {
-  //   console.log('Inserted data:', data)
-  // }
-})
+const gmail = ref('')
+const password = ref('')
 
+const handleSubmit = async () => {
+  const { data, error } = await supabase.auth.signUp({
+    Email: gmail.value,
+    Password: password.value
+  })
+  console.log('Email:', gmail.value);
+  console.log('Password:', password.value );
+  if (error) {
+    console.error('Error signing up:', error)
+  } else {
+    console.log('Signed up successfully:', data)
+  }
+}
 
 </script>
+
 
 <style scoped>
 
