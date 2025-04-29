@@ -40,19 +40,20 @@ import { ref, onMounted } from 'vue';
 const gmail = ref('')
 const password = ref('')
 async function signUpNewUser() {
-  const gmail = ref('')
   const { data, error } = await supabase.auth.signUp({
     email: gmail.value,
     password: password.value,
-    options: {
-      emailRedirectTo: 'http://localhost:5173/profile',
-    },
   })
   if (error) {
     console.error('Error signing up:', error)
   } else {
     console.log('Signed up successfully:', data)
   }
+  supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN') {
+        window.location.href = 'http://localhost:5173/profile';
+      }
+  })
 };
 </script>
 
