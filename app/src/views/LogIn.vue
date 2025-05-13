@@ -10,8 +10,11 @@
 </template>
 
 <script setup>
+import router from '@/router';
 import { supabase } from '../lib/supabaseClient';
 import { ref, onMounted } from 'vue';
+import { ref, computed } from 'vue'
+import { defineStore } from 'pinia'
 // const busers = ref('');
 // async function getUsers() {
 //   const { data } = await supabase.from('busers').select(busers.id)
@@ -44,16 +47,20 @@ async function signUpNewUser() {
     email: gmail.value,
     password: password.value,
   })
+  export const storage = defineStore('users', () => {
+
+  })
   if (error) {
     console.error('Error signing up:', error)
   } else {
     console.log('Signed up successfully:', data)
   }
-  supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN') {
-        window.location.href = 'http://localhost:5173/profile';
-      }
-  })
+  router.push('/profile')
+  // supabase.auth.onAuthStateChange((event, session) => {
+  //     if (event === 'SIGNED_IN') {
+  //       window.location.href = 'http://localhost:5173/profile';
+  //     }
+  // })
 };
 </script>
 
