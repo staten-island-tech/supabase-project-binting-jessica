@@ -1,6 +1,7 @@
 <template>
     <div>
       <form @submit.prevent="signUpNewUser">
+        <input type="username" v-model="username" placeholder="Username" required>
         <input type="email" v-model="gmail" placeholder="Gmail" required />
         <input type="password" v-model="password" placeholder="Password" required />
         <button type="submit">Submit</button>
@@ -40,15 +41,14 @@ import { defineStore } from 'pinia'
 //     console.log('Signed up successfully:', data)
 //   }
 // }
+const username = ref('')
 const gmail = ref('')
 const password = ref('')
 async function signUpNewUser() {
   const { data, error } = await supabase.auth.signUp({
     email: gmail.value,
     password: password.value,
-  })
-  export const storage = defineStore('users', () => {
-
+    username: username.value
   })
   if (error) {
     console.error('Error signing up:', error)
