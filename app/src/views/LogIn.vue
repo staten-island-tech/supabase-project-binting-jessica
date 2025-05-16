@@ -1,9 +1,14 @@
 <template>
     <div>
-      <form @submit.prevent="signUpNewUser">
+      <h1>Login!</h1>
+      <br>
+      <form @submit.prevent="signUpNewUser" >
         <input type="username" v-model="username" placeholder="Username" required>
+        <br>
         <input type="email" v-model="gmail" placeholder="Gmail" required />
+        <br>
         <input type="password" v-model="password" placeholder="Password" required />
+        <br>
         <button type="submit">Submit</button>
       </form>
       <!-- <h2 v-for="buser in busers" :key="buser.id">{{ buser.Username }}</h2> -->
@@ -14,7 +19,7 @@
 import router from '@/router';
 import { supabase } from '../lib/supabaseClient';
 import { ref, onMounted } from 'vue';
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { defineStore } from 'pinia'
 // const busers = ref('');
 // async function getUsers() {
@@ -56,11 +61,6 @@ async function signUpNewUser() {
     console.log('Signed up successfully:', data)
   }
   router.push('/profile')
-  // supabase.auth.onAuthStateChange((event, session) => {
-  //     if (event === 'SIGNED_IN') {
-  //       window.location.href = 'http://localhost:5173/profile';
-  //     }
-  // })
 };
 </script>
 
