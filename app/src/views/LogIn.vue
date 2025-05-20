@@ -18,8 +18,7 @@
 <script setup>
 import router from '@/router';
 import { supabase } from '../lib/supabaseClient';
-import { ref, onMounted } from 'vue';
-import { computed } from 'vue'
+import { ref, onMounted, computed } from 'vue';
 import { defineStore } from 'pinia'
 // const busers = ref('');
 // async function getUsers() {
@@ -30,22 +29,6 @@ import { defineStore } from 'pinia'
 //    getUsers();
 // })
 
-// const gmail = ref('')
-// const password = ref('')
-
-// const handleSubmit = async () => {
-//   const { data, error } = await supabase.auth.signUp({
-//     Email: gmail.value,
-//     Password: password.value
-//   })
-//   console.log('Email:', gmail.value);
-//   console.log('Password:', password.value );
-//   if (error) {
-//     console.error('Error signing up:', error)
-//   } else {
-//     console.log('Signed up successfully:', data)
-//   }
-// }
 const username = ref('')
 const gmail = ref('')
 const password = ref('')
