@@ -1,16 +1,16 @@
 <template>
     <div>
-      <h1>Login!</h1>
+      <h1>Sign Up!</h1>
       <br>
-      <form @submit.prevent="signUpNewUser" >
-        <input type="username" v-model="username" placeholder="Username" required>
-        <br>
-        <input type="email" v-model="gmail" placeholder="Gmail" required />
-        <br>
-        <input type="password" v-model="password" placeholder="Password" required />
-        <br>
-        <button type="submit">Submit</button>
-      </form>
+        <form @submit.prevent="signUpNewUser" >
+          <input type="username" v-model="username" placeholder="Username" required>
+          <br>
+          <input type="email" v-model="gmail" placeholder="Gmail" required />
+          <br>
+          <input type="password" v-model="password" placeholder="Password" required />
+          <br>
+          <button type="submit">Submit</button>
+        </form>
       <!-- <h2 v-for="buser in busers" :key="buser.id">{{ buser.Username }}</h2> -->
     </div>
 </template>
@@ -45,9 +45,13 @@ async function signUpNewUser() {
   }
   router.push('/profile')
 };
+
 </script>
 
 
 <style scoped>
-
+.log {
+  flex-direction: row;
+  display: flex;
+}
 </style>
