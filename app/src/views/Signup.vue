@@ -20,6 +20,7 @@ import router from '@/router';
 import { supabase } from '../lib/supabaseClient';
 import { ref, onMounted, computed } from 'vue';
 import { defineStore } from 'pinia'
+import { useStore } from '../stores/counter.js'
 // const busers = ref('');
 // async function getUsers() {
 //   const { data } = await supabase.from('busers').select(busers.id)
@@ -38,6 +39,7 @@ async function signUpNewUser() {
     password: password.value,
     username: username.value
   })
+  useStore.isUserLoggedIn.value === true
   if (error) {
     console.error('Error signing up:', error)
   } else {
@@ -45,7 +47,7 @@ async function signUpNewUser() {
   }
   router.push('/profile')
 };
-
+const user = username.value
 </script>
 
 
