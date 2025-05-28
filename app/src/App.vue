@@ -14,7 +14,6 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/login">Login Page</RouterLink>
         <RouterLink to="/profile">Profile</RouterLink>
         <RouterLink to="/posts">Posts</RouterLink>
       </nav>
@@ -26,8 +25,13 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <style scoped>
 header {
+  width: 100%;           /* full width */
+  margin: 0;             /* remove any default margin */
+  padding: 1rem;         /* optional: add some padding */
+  box-sizing: border-box; /* include padding in width */
   line-height: 1.5;
   max-height: 100vh;
+
 }
 
 .logo {
@@ -63,8 +67,10 @@ nav a:first-of-type {
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    align-items: center;      /* changed from place-items */
+    justify-content: space-between; /* or center, depending on layout */
+    padding: 1rem;
+
   }
 
   .logo {
@@ -75,6 +81,7 @@ nav a:first-of-type {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
+    width: 100%;
   }
 
   nav {

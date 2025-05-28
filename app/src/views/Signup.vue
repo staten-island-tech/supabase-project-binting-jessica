@@ -2,10 +2,10 @@
     <div>
       <h1>Sign Up!</h1>
       <br>
-        <form @submit.prevent="signUpNewUser" >
+        <form @submit.prevent="handleSignUp" >
           <input type="username" v-model="username" placeholder="Username" required>
           <br>
-          <input type="email" v-model="gmail" placeholder="Gmail" required />
+          <input type="email" v-model="email" placeholder="Email" required />
           <br>
           <input type="password" v-model="password" placeholder="Password" required />
           <br>
@@ -20,7 +20,22 @@ import router from '@/router';
 import { supabase } from '../lib/supabaseClient';
 import { ref, onMounted, computed } from 'vue';
 import { defineStore } from 'pinia'
-import { useStore } from '../stores/counter.js'
+import { useAuthStore } from '../stores/counter.js'
+
+const email = ref('')
+const username = ref('')
+const password = ref('')
+
+const auth = useAuthStore()
+
+const handleSignUp = async () => {
+  try {
+    await auth.signUp(username.value, email.value, password.value)
+  } catch (err) {
+    console.error('Signup failed:', err.message)
+  }
+}
+
 // const busers = ref('');
 // async function getUsers() {
 //   const { data } = await supabase.from('busers').select(busers.id)
@@ -30,24 +45,7 @@ import { useStore } from '../stores/counter.js'
 //    getUsers();
 // })
 
-const username = ref('')
-const gmail = ref('')
-const password = ref('')
-async function signUpNewUser() {
-  const { data, error } = await supabase.auth.signUp({
-    email: gmail.value,
-    password: password.value,
-    username: username.value
-  })
-  useStore.isUserLoggedIn.value === true
-  if (error) {
-    console.error('Error signing up:', error)
-  } else {
-    console.log('Signed up successfully:', data)
-  }
-  router.push('/profile')
-};
-const user = username.value
+
 </script>
 
 

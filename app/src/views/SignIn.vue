@@ -1,11 +1,10 @@
 <template>
     <div>
         <h1>Log In!</h1>
-        <form @submit.prevent="signInUser" class="signin">
+        <form @submit.prevent="handleSignIn" class="signin">
           <input type="username" v-model="username" placeholder="Username" required>
           <br>
-
-          <input type="email" v-model="gmail" placeholder="Gmail" required />
+          <input type="email" v-model="email" placeholder="Email" required />
           <br>
           <input type="password" v-model="password" placeholder="Password" required />
           <br>
@@ -15,7 +14,25 @@
 </template>
 
 <script setup>
+import router from '@/router';
+import { supabase } from '../lib/supabaseClient';
+import { ref, onMounted, computed } from 'vue';
+import { defineStore } from 'pinia'
+import { useAuthStore } from '../stores/counter.js'
 
+const email = ref('')
+const username = ref('')
+const password = ref('')
+
+const auth = useAuthStore()
+
+const handleSignIn = async () => {
+  try {
+    await auth.signIn(username.value, email.value, password.value)
+  } catch (err) {
+    console.error('Signup failed:', err.message)
+  }
+}
 </script>
 
 <style scoped>

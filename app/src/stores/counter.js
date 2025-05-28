@@ -1,8 +1,26 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { user } from '../views/Signup.vue'
+import { supabase } from '../supabaseClient'
 
-export const useStore = defineStore('storeUser', () => {
-    const isUserLoggedIn = ref(false)
-    return(isUserLoggedIn)
+export const useAuthStore = defineStore('auth', {
+  state: () => ({
+    user: null
+  }),
+  actions: {
+    async signUp(username, email, password) {
+      const { data, error } = await supabase.auth.signUp({ username, email, password })
+      if (error) throw error
+      this.user = data.user
+    },
+
+    async signIn(username, email, password) {
+      const { data, error } = await supabase.auth.signInWithPassword({ username, email, password })
+      if (error) throw error
+      this.user = data.user
+    },
+
+    async signOut() {
+      await supabase.auth.signOut()
+      this.user = null
+    },
+  }
 })
