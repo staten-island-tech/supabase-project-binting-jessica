@@ -11,16 +11,18 @@
           <br>
           <button type="submit">Submit</button>
         </form>
+        <SignIn/>
       <!-- <h2 v-for="buser in busers" :key="buser.id">{{ buser.Username }}</h2> -->
     </div>
 </template>
 
 <script setup>
 import router from '@/router';
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '../lib/supabaseClient.js';
 import { ref, onMounted, computed } from 'vue';
 import { defineStore } from 'pinia'
 import { useAuthStore } from '../stores/counter.js'
+import SignIn from './SignIn.vue'
 
 const email = ref('')
 const username = ref('')
@@ -31,8 +33,11 @@ const auth = useAuthStore()
 const handleSignUp = async () => {
   try {
     await auth.signUp(username.value, email.value, password.value)
+    alert('Log in')
+
   } catch (err) {
     console.error('Signup failed:', err.message)
+    alert('Already Registered')
   }
 }
 

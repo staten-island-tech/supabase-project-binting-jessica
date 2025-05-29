@@ -15,7 +15,7 @@
 
 <script setup>
 import router from '@/router';
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '../lib/supabaseClient.js';
 import { ref, onMounted, computed } from 'vue';
 import { defineStore } from 'pinia'
 import { useAuthStore } from '../stores/counter.js'
@@ -31,6 +31,7 @@ const handleSignIn = async () => {
     await auth.signIn(username.value, email.value, password.value)
   } catch (err) {
     console.error('Signup failed:', err.message)
+    alert('Wrong credentials')
   }
 }
 </script>
