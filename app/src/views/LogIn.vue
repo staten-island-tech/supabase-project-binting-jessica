@@ -34,7 +34,11 @@ const handleSignIn = async () => {
   } catch (err) {
     console.error('Signup failed:', err.message)
     alert('Wrong credentials')
+  } 
+  if (err === false) {
+    router.push('/profile')
   }
+
 }
 </script>
 

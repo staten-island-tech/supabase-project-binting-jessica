@@ -11,7 +11,6 @@
           <br>
           <button type="submit">Submit</button>
         </form>
-        <SignIn/>
       <!-- <h2 v-for="buser in busers" :key="buser.id">{{ buser.Username }}</h2> -->
     </div>
 </template>
@@ -22,7 +21,6 @@ import { supabase } from '../lib/supabaseClient.js';
 import { ref, onMounted, computed } from 'vue';
 import { defineStore } from 'pinia'
 import { useAuthStore } from '../stores/counter.js'
-import SignIn from './SignIn.vue'
 
 const email = ref('')
 const username = ref('')
