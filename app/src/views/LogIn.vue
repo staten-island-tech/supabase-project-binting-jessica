@@ -49,6 +49,7 @@ import { defineStore } from 'pinia'
 const username = ref('')
 const gmail = ref('')
 const password = ref('')
+<<<<<<< Updated upstream
 async function signUpNewUser() {
   const { data, error } = await supabase.auth.signUp({
     email: gmail.value,
@@ -62,6 +63,20 @@ async function signUpNewUser() {
   }
   router.push('/profile')
 };
+=======
+
+const auth = useAuthStore()
+
+const handleSignIn = async () => {
+  try {
+    await auth.signIn(username.value, email.value, password.value)
+    router.push('/profile')
+  } catch (err) {
+    console.error('Signup failed:', err.message)
+    alert('Wrong credentials')
+  } 
+}
+>>>>>>> Stashed changes
 </script>
 
 
