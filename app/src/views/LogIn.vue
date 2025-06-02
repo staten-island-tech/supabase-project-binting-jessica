@@ -1,68 +1,44 @@
 <template>
-    <div>
-      <h1>Login!</h1>
-      <br>
-      <form @submit.prevent="signUpNewUser" >
+  <div>
+      <SignUp/>
+      <h1>Log In!</h1>
+      <form @submit.prevent="handleSignIn" class="signin">
         <input type="username" v-model="username" placeholder="Username" required>
         <br>
-        <input type="email" v-model="gmail" placeholder="Gmail" required />
+        <input type="email" v-model="email" placeholder="Email" required />
         <br>
         <input type="password" v-model="password" placeholder="Password" required />
         <br>
         <button type="submit">Submit</button>
       </form>
-      <!-- <h2 v-for="buser in busers" :key="buser.id">{{ buser.Username }}</h2> -->
-    </div>
+  </div>
 </template>
 
 <script setup>
 import router from '@/router';
-import { supabase } from '../lib/supabaseClient';
-import { ref, onMounted } from 'vue';
-import { computed } from 'vue'
+import { supabase } from '../lib/supabaseClient.js';
+import { ref, onMounted, computed } from 'vue';
 import { defineStore } from 'pinia'
-// const busers = ref('');
-// async function getUsers() {
-//   const { data } = await supabase.from('busers').select(busers.id)
-//   busers.value = data;
-// }
-// onMounted(() => {
-//    getUsers();
-// })
+import { useAuthStore } from '../stores/counter.js'
+import SignUp from '../components/SignUp.vue'
 
-// const gmail = ref('')
-// const password = ref('')
-
-// const handleSubmit = async () => {
-//   const { data, error } = await supabase.auth.signUp({
-//     Email: gmail.value,
-//     Password: password.value
-//   })
-//   console.log('Email:', gmail.value);
-//   console.log('Password:', password.value );
-//   if (error) {
-//     console.error('Error signing up:', error)
-//   } else {
-//     console.log('Signed up successfully:', data)
-//   }
-// }
+const email = ref('')
 const username = ref('')
-const gmail = ref('')
 const password = ref('')
 
 const auth = useAuthStore()
 
 const handleSignIn = async () => {
-  try {
-    await auth.signIn(username.value, email.value, password.value)
-    router.push('/profile')
-  } catch (err) {
-    console.error('Signup failed:', err.message)
-    alert('Wrong credentials')
-  } 
+try {
+  await auth.signIn(username.value, email.value, password.value)
+  router.push('/profile')
+} catch (err) {
+  console.error('Signup failed:', err.message)
+  alert('Wrong credentials')
+} 
+
 }
 </script>
-
 
 <style scoped>
 
