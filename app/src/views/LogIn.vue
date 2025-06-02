@@ -31,13 +31,11 @@ const auth = useAuthStore()
 const handleSignIn = async () => {
   try {
     await auth.signIn(username.value, email.value, password.value)
+    router.push('/profile')
   } catch (err) {
     console.error('Signup failed:', err.message)
     alert('Wrong credentials')
   } 
-  if (err === false) {
-    router.push('/profile')
-  }
 
 }
 </script>
