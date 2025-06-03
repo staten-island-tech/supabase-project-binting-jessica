@@ -3,24 +3,44 @@ import { supabase } from '../lib/supabaseClient'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null
+    user: {
+      username: '',
+      email: '',
+    }
   }),
   actions: {
     async signUp(username, email, password) {
-      const { data, error } = await supabase.auth.signUp({ username, email, password })
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { username }
+        }
+      })
       if (error) throw error
-      this.user = data.user
+
+      this.user = {
+        username,
+        email: data.user.email
+      }
     },
 
-    async signIn(username, email, password) {
-      const { data, error } = await supabase.auth.signInWithPassword({ username, email, password })
+    async signIn(email, password) {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      })
       if (error) throw error
-      this.user = data.user
+
+      this.user = {
+        username: data.user.user_metadata.username || '',
+        email: data.user.email
+      }
     },
 
     async signOut() {
       await supabase.auth.signOut()
-      this.user = null
+      this.user = { username: '', email: '' }
     },
   }
 })
