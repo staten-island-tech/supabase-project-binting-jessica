@@ -6,7 +6,7 @@ const props = defineProps({
   auth: Object
 })
 
-export const useAuthStore = defineStore('profile', {
+export const usePostStore = defineStore('profile', {
   state: () => ({
     title: null,
     images: [],
@@ -14,10 +14,5 @@ export const useAuthStore = defineStore('profile', {
     // timestamp: ,
     content: null,
     id: auth.user.id,
-  }),
-  actions: {
-    likes() {
-      this.likes++
-    }
-  }
+  })
 })

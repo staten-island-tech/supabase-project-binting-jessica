@@ -1,11 +1,11 @@
 <template>
     <div>
+        <PostsPg/>
     </div>
 </template>
 
 <script setup>
-import { defineStore } from 'pinia'
-import { supabase } from '../lib/supabaseClient';
+import PostsPg from '../components/PostsPg.vue'
 
 
 

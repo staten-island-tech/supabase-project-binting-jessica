@@ -18,7 +18,6 @@
 import router from '@/router';
 import { supabase } from '../lib/supabaseClient.js';
 import { ref, onMounted, computed } from 'vue';
-import { defineStore } from 'pinia'
 import { useAuthStore } from '../stores/counter.js'
 import SignUp from '../components/SignUp.vue'
 
