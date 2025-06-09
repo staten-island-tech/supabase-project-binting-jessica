@@ -30,7 +30,7 @@ const handleSignIn = async () => {
     await auth.signIn(email.value, password.value)
     router.push('/profile')
   } catch (err) {
-    console.error('Signup failed:', err.message)
+    console.error('Signin failed:', err.message)
     alert('Wrong credentials')
   } 
 
