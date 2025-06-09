@@ -1,11 +1,6 @@
 import { defineStore } from 'pinia'
 import { supabase } from '../lib/supabaseClient'
 
-const props = defineProps({
-  user: Object,
-  auth: Object
-})
-
 export const usePostStore = defineStore('profile', {
   state: () => ({
     title: null,
@@ -13,6 +8,11 @@ export const usePostStore = defineStore('profile', {
     likes: 0,
     // timestamp: ,
     content: null,
-    id: auth.user.id,
-  })
+    id: null,
+  }),
+  actions: {
+    setUser(auth) {
+      this.userId = auth?.user?.id
+    }
+  }
 })
