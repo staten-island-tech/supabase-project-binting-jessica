@@ -1,13 +1,16 @@
 <template>
     <div>
-
+        <PostsPg/>
     </div>
 </template>
 
 <script setup>
+import PostsPg from '../components/PostsPg.vue'
+
+
 
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

@@ -22,5 +22,10 @@ export const useAuthStore = defineStore('auth', {
       await supabase.auth.signOut()
       this.user = null
     },
+    async fetchUser() {
+      const { data, error } = await supabase.auth.getUser()
+      if (error) throw error
+      this.user = data?.user ?? null
+    }
   }
 })

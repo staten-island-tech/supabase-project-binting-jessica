@@ -1,5 +1,5 @@
 <script setup>
-import HomePg from '../components/HomePg.vue'
+import TheWelcome from '../components/HomePg.vue'
 </script>
 
 <template>
