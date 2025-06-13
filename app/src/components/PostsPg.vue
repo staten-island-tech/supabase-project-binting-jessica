@@ -1,4 +1,5 @@
 <template>
+  <button v-on:click="toggleTheme()">Color Theme</button>
     <div class="container">
       <div class="posts-section">
         <h1>Posts</h1>
@@ -44,6 +45,7 @@ onMounted(async () => {
   state.setUser(auth)
   const { data: posts } = await supabase.from('posts').select('*')
   state.posts = posts
+  state.initializeTheme()
 })
 
 
@@ -71,9 +73,13 @@ function incrementLikes(index) {
 function deletePost(postId) {
   state.deletePost(postId)
 }
+function toggleTheme() {
+  state.toggleTheme()
+}
+
 </script>
 
-<style scoped>
+<style >
 .post {
   flex-direction: column;
   background: #fff;
@@ -138,5 +144,42 @@ function deletePost(postId) {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #fcfafa;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --light: #d2dff3;
+  --dark: #091c36;
+
+  --light-red: #f87171;
+  --dark-red: #dc2626;
+
+  --primary: var(--light);
+  --secondary: var(--dark);
+  --font-color: #000000;
+
+  --h1: 5rem;
+  --h2: 1.5rem;
+  --h3: .8rem;
+  --h4: 2.25rem;
+  --h5: 1.5rem;
+}
+body.light {
+  background-color: var(--light);
+  color: #000000;
+}
+
+body.dark {
+  background-color: var(--dark);
+  color: #f0f0f0;
+}
 </style>
