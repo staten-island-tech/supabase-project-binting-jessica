@@ -9,9 +9,23 @@ export const usePostStore = defineStore('profile', {
     // timestamp: ,
     content: null,
     userId: null,
-    posts: []
+    posts: [],
+    theme: 'light'
   }),
   actions: {
+    initializeTheme() {
+      const savedTheme = localStorage.getItem('theme')
+      if (savedTheme) {
+        this.theme = savedTheme
+      }
+      document.body.classList.add(this.theme)
+    },
+    toggleTheme() {
+      this.theme = this.theme === 'light' ? 'dark' : 'light'
+      document.body.classList.remove('light', 'dark')
+      document.body.classList.add(this.theme)
+      localStorage.setItem('theme', this.theme)
+    },
     setUser(auth) {
       this.userId = auth?.user?.id ?? null
     },
